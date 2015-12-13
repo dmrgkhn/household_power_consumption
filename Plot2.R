@@ -1,0 +1,7 @@
+project1 <- read.table("C:/Users/Z/Desktop/project1/household_power_consumption.txt", header = TRUE, sep = ";", na.strings = "?")
+project1 <- transform(project1, Date2 = as.Date(Date, "%d/%m/%Y"))
+project1_dates <- subset(project1, Date2 >= as.Date("2007-02-01") & Date2 <= as.Date("2007-02-02"))
+project1_dates <- transform(project1_dates, DateTime = strptime(paste(Date, Time, sep = " "), format = "%d/%m/%Y %H:%M:%S"))
+png(filename = "Plot2.png", width = 480, height = 480)
+with(project1_dates, plot(DateTime, Global_active_power, type = 'l', ylab = "Global Active Power (kilowatts)", xlab = ""))
+dev.off()
